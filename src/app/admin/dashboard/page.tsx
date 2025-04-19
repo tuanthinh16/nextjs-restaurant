@@ -1,0 +1,1 @@
+export default function page() { return <div>ADMIN WORKING</div> }

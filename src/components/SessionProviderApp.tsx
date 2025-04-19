@@ -1,0 +1,15 @@
+// app/providers.tsx
+"use client";
+
+import { SessionProvider } from "next-auth/react";
+
+
+
+export function ProvidersSession({ children }: { children: React.ReactNode }) {
+    return (
+        <SessionProvider>
+            {children}
+        </SessionProvider>
+
+    )
+}

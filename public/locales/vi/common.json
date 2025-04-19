@@ -1,0 +1,47 @@
+{
+    "title": "Blog Ẩm Thực",
+    "description": "Khám phá các công thức ngon",
+    "navItems": [
+        {
+            "label": "Trang Chủ",
+            "href": "/"
+        },
+        {
+            "label": "Giới Thiệu",
+            "href": "/about"
+        },
+        {
+            "label": "Thực Đơn",
+            "href": "/menu"
+        },
+        {
+            "label": "Tin Tức",
+            "href": "/news"
+        },
+        {
+            "label": "Tuyển Dụng",
+            "href": "/careers"
+        },
+        {
+            "label": "Chi Nhánh",
+            "href": "/branches"
+        }
+    ],
+    "footer": {
+        "copyright": "© 2025 Bản quyền thuộc về chúng tôi."
+    },
+    "heroItems": {
+        "title": "Drink - Food - Music",
+        "subtitle": "Tọa độ ăn chơi bậc nhất Hà Thành",
+        "subtitle2": "Mang đến cho bạn những trải nghiệm tuyệt vời khó quên",
+        "button1": "Xem thêm",
+        "button2": "Gọi ngay"
+    },
+    "buttonSeeMore": "Xem thêm",
+    "buttonCallNow": "Gọi ngay",
+    "aboutUs": "VỀ CHÚNG TÔI",
+    "bestSellerTitle": "BÁN CHẠY NHẤT",
+    "menuTitle": "MENU",
+    "menuCategory": "DANH MỤC MÓN ĂN",
+    "downPDF": "Tải PDF"
+}

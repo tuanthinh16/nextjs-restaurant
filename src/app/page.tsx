@@ -1,103 +1,78 @@
-import Image from "next/image";
+'use client'
+import { useEffect, useRef, useState } from "react";
+import { AboutSection } from "@/components/home/AboutSection";
+import { BestSeller } from "@/components/home/BestSeller";
+import HeroSection from "@/components/home/HeroSection";
+import MenuSection from "@/components/home/MenuSection";
+import Header from "@/components/ui/Header";
+import { Footer } from "@/components/ui/Footer";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    const [inView, setInView] = useState({
+        about: false,
+        bestSeller: false,
+        menu: false,
+    });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    const aboutRef = useRef(null);
+    const bestSellerRef = useRef(null);
+    const menuRef = useRef(null);
+    useEffect(() => {
+        window.scrollTo(0, 0); // Cuộn lên đầu trang khi trang được load lại
+    }, []); // Chỉ gọi 1 lần khi component được mount
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry], observer) => {
+                if (entry.isIntersecting) {
+                    setInView((prev) => ({
+                        ...prev,
+                        [entry.target.id]: true,
+                    }));
+                    observer.unobserve(entry.target); // Để không gọi lại lần nữa
+                }
+            },
+            { threshold: 0.3 } // Phần tử cần xuất hiện ít nhất 30% trong viewport
+        );
+
+        if (aboutRef.current) observer.observe(aboutRef.current);
+        if (bestSellerRef.current) observer.observe(bestSellerRef.current);
+        if (menuRef.current) observer.observe(menuRef.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
+    return (
+        <>
+            <Header />
+            <HeroSection />
+            <div
+                id="about"
+                ref={aboutRef}
+                className={`${inView.about ? "animate-fadeInUp" : "opacity-0"
+                    } transition-all duration-1000`}
+            >
+                <AboutSection />
+            </div>
+            <div
+                id="bestSeller"
+                ref={bestSellerRef}
+                className={`${inView.bestSeller ? "animate-slideInFromLeft" : "opacity-0"
+                    } transition-all duration-1000`}
+            >
+                <BestSeller />
+            </div>
+            <div
+                id="menu"
+                ref={menuRef}
+                className={`${inView.menu ? "animate-zoomIn" : "opacity-0"
+                    } transition-all duration-1000`}
+            >
+                <MenuSection />
+            </div>
+            <Footer />
+        </>
+    );
 }

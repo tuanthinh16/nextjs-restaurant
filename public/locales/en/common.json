@@ -1,0 +1,47 @@
+{
+    "title": "Food Blog",
+    "description": "Discover delicious recipes",
+    "navItems": [
+        {
+            "label": "Home",
+            "href": "/"
+        },
+        {
+            "label": "About",
+            "href": "/about"
+        },
+        {
+            "label": "Menu",
+            "href": "/menu"
+        },
+        {
+            "label": "News",
+            "href": "/news"
+        },
+        {
+            "label": "Careers",
+            "href": "/careers"
+        },
+        {
+            "label": "Branches",
+            "href": "/branches"
+        }
+    ],
+    "footer": {
+        "copyright": "© 2025 All rights reserved."
+    },
+    "heroItems": {
+        "title": "Drink  - Food - Music",
+        "subtitle": "The best place to have fun in Hanoi",
+        "subtitle2": "Bring you unforgettable wonderful experiences",
+        "button1": "See More",
+        "button2": "Call Now"
+    },
+    "buttonSeeMore": "See More",
+    "buttonCallNow": "Order Now",
+    "aboutUs": "ABOUT US",
+    "bestSellerTitle": "Best Sellers",
+    "menuTitle": "MENU",
+    "menuCategory": "CATEGORIES",
+    "downPDF": "Download PDF"
+}

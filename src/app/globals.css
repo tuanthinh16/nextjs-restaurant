@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  background: linear-gradient(to right bottom,
+      #616161 0%,
+      #814d29 100%);
   --foreground: #171717;
 }
 
@@ -14,8 +16,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    background: linear-gradient(to right bottom,
+        #616161 0%,
+        #814d29 100%);
+    --foreground: #171717;
   }
 }
 
@@ -23,4 +27,52 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-dark-texture {
+  background-color: var(--background-dark);
+  /* background-image: url('/nen-best-seller.png'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wavy-divider {
+  /* background-image: url('https://ext.same-assets.com/2455550972/1289209573.png'); */
+  background-repeat: repeat-x;
+  background-size: contain;
+  height: 30px;
+}
+
+/* Hiệu ứng fade in và di chuyển từ dưới lên */
+.animate-fadeInUp {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+
+/* Hiệu ứng slide in từ trái */
+.animate-slideInFromLeft {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.opacity-0 {
+  opacity: 0;
+  transform: translateX(-50px);
+  /* Di chuyển từ trái vào */
+}
+
+/* Hiệu ứng zoom in */
+.animate-zoomIn {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.opacity-0 {
+  opacity: 0;
+  transform: scale(0.9);
+  /* Zoom nhỏ ban đầu */
 }

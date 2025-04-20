@@ -27,7 +27,8 @@ export const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, children }) 
 
 
 // components/DialogForm.tsx
-import { Dish } from '@/types';
+import { Dish, DishType } from '@/types';
+import { get } from '@/utils/api';
 
 interface DialogFormProps {
     onSubmit: (data: any) => void;
@@ -40,7 +41,9 @@ export const DialogForm: React.FC<DialogFormProps> = ({ onSubmit, onClose, editD
         name: '',
         price: '',
         description: '',
+        menu_type_id: ''
     });
+    const [menuTypes, setMenuTypes] = useState<DishType[]>([]);
 
     useEffect(() => {
         if (editDish) {
@@ -48,10 +51,28 @@ export const DialogForm: React.FC<DialogFormProps> = ({ onSubmit, onClose, editD
                 name: editDish.name || '',
                 price: editDish.price?.toString() || '',
                 description: editDish.description || '',
+                menu_type_id: editDish?.menu_type_id?.toString() || '',
             });
         }
     }, [editDish]);
-
+    useEffect(() => {
+        fetchDataToDishType();
+    }, []);
+    const fetchDataToDishType = async () => {
+        const rs = await get<DishType[]>('/api/menu-type');
+        if (rs.success) {
+            setMenuTypes(rs.data as DishType[]);
+        }
+        console.log("res menu-type ", rs)
+        console.log("menu type", menuTypes)
+    }
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({ ...prevState, [name]: value }));
@@ -59,7 +80,7 @@ export const DialogForm: React.FC<DialogFormProps> = ({ onSubmit, onClose, editD
 
     const handleSubmit = () => {
         onSubmit(formData);
-        setFormData({ name: '', price: '', description: '' });
+        setFormData({ name: '', price: '', description: '', menu_type_id: '' });
     };
 
     return (
@@ -69,7 +90,20 @@ export const DialogForm: React.FC<DialogFormProps> = ({ onSubmit, onClose, editD
                 <Input label="Name" value={formData.name} onChange={handleInputChange} name="name" />
                 <Input label="Price" value={formData.price} onChange={handleInputChange} name="price" type="number" />
                 <Input label="Description" value={formData.description} onChange={handleInputChange} name="description" />
-
+                <label className="block text-sm font-medium mb-1">Menu Type</label>
+                <select
+                    name="menu_type_id"
+                    value={formData.menu_type_id}
+                    onChange={handleSelectChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3"
+                >
+                    <option value="">-- Chọn loại --</option>
+                    {menuTypes.map((type) => (
+                        <option key={type.id} value={type.id}>
+                            {type.menu_type_name}
+                        </option>
+                    ))}
+                </select>
                 <div className="mt-6 flex justify-between">
                     <button
                         onClick={onClose}

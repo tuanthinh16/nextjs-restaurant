@@ -4,7 +4,9 @@ import { get, post, put, deleteAPI } from '@/utils/api';  // Thêm API upload �
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogForm } from '@/components/ui/Dialog';
 import { CloudinaryUploadResponse, Dish } from '@/types';
-
+import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
+import Pagination from '@/components/ui/Pagination';
+import Waitting from '@/components/ui/Waitting';
 
 export default function MenuManager() {
     const [dishes, setDishes] = useState<Dish[]>([]);
@@ -21,10 +23,11 @@ export default function MenuManager() {
 
     const fetchDishes = async (start: number) => {
         const res = await get<Dish[]>(`/api/menu?start=${start}&limit=${limit}`);
+        console.log(res)
         if (res.success) {
             // console.log(res)
             setDishes(res.data as Dish[]);
-            setTotalItems(dishes.length); // Assuming API response includes the total count of items
+            setTotalItems(res.total_rows as number); // Assuming API response includes the total count of items
         }
 
     };
@@ -125,30 +128,54 @@ export default function MenuManager() {
     };
 
     // Calculate total pages
-    const totalPages = Math.ceil(totalItems / limit) | 1;
+    // console.log(totalItems)
+    const totalPages = Math.ceil(totalItems / limit);
 
     return (
-        <div className="p-4 max-w-3xl mx-auto relative">
+        <div className="p-4 m-auto relative">
             {imageUploading && (
-                <div className="fixed inset-0  bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
-                </div>
+                <Waitting />
             )}
             <div className={imageUploading ? 'opacity-50 pointer-events-none' : ''}>
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 w-[350px] md:w-full">
                     <h1 className="text-2xl font-bold">Quản lý món ăn</h1>
                     <Button onClick={() => { setEditDish(null); setDialogOpen(true); }}>Thêm món</Button>
                 </div>
 
-                <ul>
+                <div className='flex flex-wrap gap-3'>
                     {dishes.map((dish) => (
-                        <li key={dish.id} className="mb-4 p-4 bg-white rounded shadow flex items-center">
+                        <div key={dish.id} className="mb-4 p-4 bg-white rounded shadow flex items-center w-[350px]">
                             <div className="flex-1">
-                                <div className="font-semibold text-lg">{dish.name} - {dish.price}₫</div>
-                                <p className="text-gray-600">{dish.description}</p>
-                                <div className="space-x-3 mt-2">
-                                    <Button variant="outline" onClick={() => { setEditDish(dish); setDialogOpen(true); }}>Sửa</Button>
-                                    <Button variant="destructive" onClick={() => handleDelete(dish.id)}>Xóa</Button>
+                                <div className="font-semibold text-lg">
+                                    {dish.name} - {Number(dish.price).toLocaleString('vi-VN')}₫
+                                </div>
+                                <p className="text-gray-600">{dish.description.substring(0, 50)}</p>
+                                <div className="space-x-3 mt-2 flex">
+                                    <button
+                                        onClick={() => { setEditDish(dish); setDialogOpen(true); }}
+                                        className="h-8 w-8 p-0 rounded-md flex items-center justify-center 
+                                        bg-white border border-gray-300 hover:bg-gray-100 
+                                        text-gray-600 hover:text-blue-600 transition-colors
+                                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        aria-label="Sửa món"
+                                        title="Sửa"
+                                    >
+                                        <span className="text-lg">✏️</span>
+                                    </button>
+
+                                    {/* Nút Xóa - Biểu tượng thùng rác Unicode 🗑️ */}
+                                    <button
+                                        onClick={() => handleDelete(dish.id)}
+                                        className="h-8 w-8 p-0 rounded-md flex items-center justify-center 
+                                        bg-white border border-gray-300 hover:bg-gray-100 
+                                        text-gray-600 hover:text-red-600 transition-colors
+                                        focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+                                        ml-2"  // Thêm khoảng cách giữa 2 nút
+                                        aria-label="Xóa món"
+                                        title="Xóa"
+                                    >
+                                        <span className="text-lg">🗑️</span>
+                                    </button>
                                 </div>
                             </div>
                             <div className="ml-4">
@@ -178,28 +205,15 @@ export default function MenuManager() {
                                     </div>
                                 )}
                             </div>
-                        </li>
+                        </div>
                     ))}
-                </ul>
-
-                {/* Pagination */}
-                <div className="flex justify-center mt-4">
-                    <Button
-                        disabled={currentPage === 1}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                    >
-                        Previous
-                    </Button>
-                    <span className="mx-4">{currentPage} / {totalPages}</span>
-                    <Button
-                        disabled={currentPage === totalPages}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
-                    >
-                        Next
-                    </Button>
                 </div>
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    handlePageChange={handlePageChange}
+                />
 
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                     <DialogForm

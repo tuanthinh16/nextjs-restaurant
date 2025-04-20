@@ -43,5 +43,14 @@
     "bestSellerTitle": "BÁN CHẠY NHẤT",
     "menuTitle": "MENU",
     "menuCategory": "DANH MỤC MÓN ĂN",
-    "downPDF": "Tải PDF"
+    "downPDF": "Tải PDF",
+    "mapTitle": "Sơ đồ nhà hàng",
+    "mapHint": "Vui lòng chọn bàn để bắt đầu đặt món",
+    "tables": "Bàn",
+    "person": "người",
+    "mapHint2": "Sơ đồ bố trí các khu vực trong nhà hàng",
+    "cap": "Sức chứa",
+    "ques-start": "Bạn muốn bắt đầu chứ ?",
+    "button-unlock": "Mở khoá",
+    "button-continue": "Tiếp tục"
 }

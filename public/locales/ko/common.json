@@ -43,5 +43,14 @@
     "aboutUs": "우리에 대해",
     "menuTitle": "메뉴",
     "menuCategory": "카테고리",
-    "downPDF": "PDF 다운로드"
+    "downPDF": "PDF 다운로드",
+    "mapTitle": "레스토랑 지도",
+    "mapHint": "주문을 시작하려면 테이블을 선택하세요",
+    "tables": "테이블",
+    "person": "사람",
+    "mapHint2": "레스토랑 구역 레이아웃 지도",
+    "cap": "수용량",
+    "ques-start": "시작하시겠습니까?",
+    "button-unlock": "잠금 해제",
+    "button-continue": "계속"
 }

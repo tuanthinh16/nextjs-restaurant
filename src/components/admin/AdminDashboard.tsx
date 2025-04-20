@@ -6,6 +6,7 @@ import { DashboardData } from "@/types";
 import { get } from "@/utils/api";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Waitting from "../ui/Waitting";
 
 export default function DashboardPage() {
     const { data: session } = useSession();
@@ -28,7 +29,7 @@ export default function DashboardPage() {
         fetchData();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div><Waitting /></div>;
     if (!data) return <div>No data</div>;
 
     return (
@@ -39,7 +40,9 @@ export default function DashboardPage() {
                 totalTables={data?.totalTables || 0}
                 totalDishes={data?.totalDishes || 0}
                 totalUsers={data?.totalUsers || 0}
-                revenue={data?.revenue || "0"}
+                revenue={new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(data?.revenue || 0))}
+
+
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -6,6 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { Dialog } from '@/components/ui/Dialog';
 import { DialogTableForm } from '@/components/ui/DialogTableForm';
+import Waitting from '@/components/ui/Waitting';
 type Table = {
     id: number
     table_number: string
@@ -75,7 +76,7 @@ export default function TablePage() {
             setLoading(false)
         }
     }
-    if (loading) <Loading />
+    if (loading) <Waitting />
     if (!tables) return <div className='pt-20 m-auto'>No data found</div>
     return (
         <div className="p-4">

@@ -35,7 +35,7 @@ const HeroSection = () => {
                 <p className="text-lg md:text-xl mb-8">{t('heroItems.subtitle2')}</p>
                 <div className="space-x-4">
                     <button className="px-4 py-2 bg-red-700 rounded-lg border border-red-400 hover:border-red-800 hover:bg-red-500 hover:font-bold cursor-pointer" onClick={() => router.push('/about-us')}>{t('buttonSeeMore')}</button>
-                    <button className="px-4 py-2 bg-red-700 rounded-lg border border-red-400 hover:border-red-800 hover:bg-red-500 hover:font-bold cursor-pointer">{t('buttonCallNow')}</button>
+                    <button className="px-4 py-2 bg-red-700 rounded-lg border border-red-400 hover:border-red-800 hover:bg-red-500 hover:font-bold cursor-pointer" onClick={() => router.push('/table')}>{t('buttonCallNow')}</button>
                 </div>
             </div>
         </section>

@@ -13,7 +13,7 @@ const api = axios.create({
 });
 
 // Hàm helper để lấy token từ session
-const getAuthToken = async (): Promise<string | null> => {
+export const getAuthToken = async (): Promise<string | null> => {
     try {
         const session = await getSession();
 
@@ -97,6 +97,7 @@ type ApiResponse<T = any> = {
     success: boolean;
     data?: T;
     message?: string;
+    total_rows?: number;
 };
 
 export const get = async <T>(url: string, params?: any): Promise<ApiResponse<T>> => {

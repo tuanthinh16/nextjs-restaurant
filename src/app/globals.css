@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  background: linear-gradient(to right bottom,
+  /* --background: linear-gradient(to right bottom,
       #616161 0%,
-      #814d29 100%);
+      #814d29 100%); */
+  --background: white;
   --foreground: #171717;
 }
 
@@ -30,10 +31,14 @@ body {
 }
 
 .bg-dark-texture {
-  background-color: var(--background-dark);
+  background-color: gray;
   /* background-image: url('/nen-best-seller.png'); */
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.bg-texture {
+  background-color: rgb(250, 250, 250);
 }
 
 .wavy-divider {

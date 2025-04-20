@@ -11,8 +11,12 @@ export interface Dish {
     price: number;
     description: string;
     image_url?: string;
+    menu_type_id: number;
 }
-
+export interface DishType {
+    id: number;
+    menu_type_name: string;
+}
 export interface Order {
     id: string
     items: number

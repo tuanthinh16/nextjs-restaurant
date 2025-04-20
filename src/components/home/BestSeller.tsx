@@ -10,6 +10,7 @@ import { font_title } from '@/config/font'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '@/app/languageContex'
 import { business_logo } from '@/config/config'
+import { Dish } from '@/types'
 
 export function BestSeller() {
     const { t } = useTranslation('common');
@@ -18,8 +19,8 @@ export function BestSeller() {
     const [error, setError] = useState<any>(null)
     const { locale } = useLanguage();
     useEffect(() => {
-        get('/api/menu/best-seller?target_lang=' + locale)
-            .then(res => setData(res.data))
+        get<Dish[]>('/api/menu/best-seller?target_lang=' + locale)
+            .then(res => setData(res.data as Dish[]))
             .catch(err => setError(err))
             .finally(() => setLoading(false))
     }, [locale])

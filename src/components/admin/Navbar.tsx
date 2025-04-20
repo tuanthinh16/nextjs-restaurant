@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 export function AdminNavbar() {
     const { data: session } = useSession();
     return (
-        <header className="bg-white shadow-sm md:w-10/12 fixed z-1 w-full ">
+        <header className="bg-white shadow-sm w-10/12 fixed z-1 ">
             <div className="px-6 py-3 flex items-center justify-between">
                 <div className="flex items-center pl-10">
                     <div className="relative">

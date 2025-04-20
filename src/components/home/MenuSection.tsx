@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import CardLoading from '../ui/CardLoading';
 import { useLanguage } from '@/app/languageContex';
 import { useTranslation } from 'react-i18next';
+import { Dish } from '@/types';
 
 const MenuSection = () => {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<Dish[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<any>(null);
     const { locale } = useLanguage();
@@ -15,7 +16,7 @@ const MenuSection = () => {
     useEffect(() => {
         setLoading(true);
         get('/api/menu?target_lang=' + locale)
-            .then(res => setData(res.data))
+            .then(res => setData(res.data as Dish[]))
             .catch(err => setError(err))
             .finally(() => setLoading(false));
     }, [locale]);
@@ -32,7 +33,7 @@ const MenuSection = () => {
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">{t('menuTitle')}</h1>
             <div className="grid grid-cols-2 gap-4">
-                {data?.map((item: any) => (
+                {/* {data?.map((item: any) => (
                     <div key={item.id} className="border p-4 rounded shadow">
                         <h2 className="text-xl font-semibold">{item.name}</h2>
                         <p className="text-gray-600">{item.description}</p>
@@ -45,7 +46,7 @@ const MenuSection = () => {
                             />
                         )}
                     </div>
-                ))}
+                ))} */}
             </div>
         </div>
     );

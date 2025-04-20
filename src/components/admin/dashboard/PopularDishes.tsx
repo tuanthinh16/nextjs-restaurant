@@ -10,8 +10,8 @@ export function PopularDishes({ dishes }: { dishes: Dish[] }) {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Món ăn phổ biến</h2>
             <div className="space-y-3">
-                {dishes.map((dish) => (
-                    <div key={dish.id} className="flex items-center">
+                {dishes.map((dish, index) => (
+                    <div key={index} className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10 rounded-full bg-cyan-100 flex items-center justify-center mr-3">
                             <span className="text-cyan-600">🍲</span>
                         </div>

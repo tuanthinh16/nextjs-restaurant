@@ -43,5 +43,14 @@
     "bestSellerTitle": "Best Sellers",
     "menuTitle": "MENU",
     "menuCategory": "CATEGORIES",
-    "downPDF": "Download PDF"
+    "downPDF": "Download PDF",
+    "mapTitle": "Restaurant map",
+    "mapHint": "Please select a table to start ordering",
+    "tables": "Table",
+    "person": "person",
+    "mapHint2": "Layout of areas in the restaurant",
+    "cap": "Capacity",
+    "ques-start": "Do you want to start?",
+    "button-unlock": "Unlock",
+    "button-continue": "Continue"
 }

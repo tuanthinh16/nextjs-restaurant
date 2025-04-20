@@ -1,7 +1,6 @@
 'use client'
 
-import { MenuItems } from '@/data/menu'
-import { Ga_Maamli, Mogra, Pacifico, Poppins } from 'next/font/google'
+import { Ga_Maamli, Mogra, Poppins } from 'next/font/google'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { LanguageSwitcher } from './LanguageSwitcher'
@@ -27,8 +26,11 @@ const poppins = Poppins({
     weight: ['400'],
     variable: '--poppins',
 })
+interface HeaderProps {
+    classNameHeader?: string;
 
-const Header = () => {
+}
+const Header: React.FC<HeaderProps> = ({ classNameHeader }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isSticky, setIsSticky] = useState(false)
     const { t } = useTranslation('common');
@@ -44,7 +46,7 @@ const Header = () => {
     return (
         <header
             className={`w-full fixed top-0 z-1 transition-all duration-300 ${isOpen ?? 'bg-gray-200'} ${isSticky && !isOpen ? 'bg-gray-200/80 backdrop-blur shadow-md py-2' : 'bg-transparent py-4'
-                } text-white`}
+                } text-white ${classNameHeader}`}
         >
             <div className="container relative mx-auto px-4 flex items-center justify-between transition-all duration-300">
                 <h1

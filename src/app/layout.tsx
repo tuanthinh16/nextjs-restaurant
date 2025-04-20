@@ -5,6 +5,8 @@ import { LanguageProvider } from "@/app/languageContex";
 import { business_name } from "@/config/config";
 import { SessionProvider } from "next-auth/react";
 import { ProvidersSession } from "@/components/SessionProviderApp";
+import Header from "@/components/ui/Header";
+import { Footer } from "@/components/ui/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +57,7 @@ export default function RootLayout({
         <ProvidersSession >
           <LanguageProvider>
 
-            <main className="mx-auto min-h-screen w-full">
+            <main className="min-h-screen w-10/12 md:w-full">
               {children}
             </main>
 

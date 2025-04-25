@@ -18,12 +18,21 @@ export interface DishType {
     menu_type_name: string;
 }
 export interface Order {
-    id: string
+    id: number
     items: number
-    amount: string
+    total: string
     status: OrderStatus
     tableNumber?: number
-    timestamp?: string
+    table_id: number;
+    order_time?: string
+    out_time?: string;
+}
+export interface OrderItem {
+    id: string;
+    order_id: number;
+    menu_item_id: number;
+    quantity: number;
+    price: number;
 }
 
 export interface DashboardData {

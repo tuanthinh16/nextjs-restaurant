@@ -61,13 +61,13 @@ const TablePage = () => {
         initSocket()
 
         return () => {
-            if (socket) {
-                socket.off('tables_data')
-                socket.off('table_locked')
-                socket.off('table_unlocked')
-                socket.off('table_error')
-                socket.disconnect()
-            }
+            // if (socket) {
+            //     socket.off('tables_data')
+            //     socket.off('table_locked')
+            //     socket.off('table_unlocked')
+            //     socket.off('table_error')
+            //     // socket.disconnect()
+            // }
         }
     }, [])
 

@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { LayoutDashboard, Menu, Table, Users, Utensils, X } from 'lucide-react'
+import { LayoutDashboard, Menu, Table, Users, Utensils, X, ListOrdered } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { business_name } from '@/config/config'
 import Link from 'next/link'
@@ -14,7 +14,8 @@ export function Sidebar() {
         { href: '/admin', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
         { href: '/admin/tables', icon: <Table size={18} />, label: 'Quản lý bàn' },
         { href: '/admin/menu', icon: <Utensils size={18} />, label: 'Quản lý món ăn' },
-        { href: '/admin/users', icon: <Users size={18} />, label: 'Quản lý user' }
+        { href: '/admin/users', icon: <Users size={18} />, label: 'Quản lý user' },
+        { href: '/admin/orders', icon: <ListOrdered size={18} />, label: 'Quản lý bàn ăn' }
     ]
 
     return (

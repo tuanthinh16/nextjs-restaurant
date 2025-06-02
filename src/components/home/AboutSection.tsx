@@ -63,7 +63,7 @@ export function AboutSection() {
                     >
                         {/* Header (Logo + Title) */}
                         <div className="flex items-center mb-10 gap-6">
-                            <motion.div
+                            {/* <motion.div
                                 whileHover={{ rotate: 10, scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
@@ -73,7 +73,7 @@ export function AboutSection() {
                                     fill
                                     className="rounded-lg shadow-md"
                                 />
-                            </motion.div>
+                            </motion.div> */}
                             <h2 className={`text-4xl md:text-5xl font-bold text-gray-800 ${font_title.className}`}>
                                 <span className="bg-gradient-to-r from-amber-500 to-red-500 bg-clip-text text-transparent">
                                     {t('aboutUs')}

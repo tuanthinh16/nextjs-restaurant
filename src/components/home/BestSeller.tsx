@@ -96,7 +96,7 @@ export function BestSeller() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex flex-col items-center mb-16"
                 >
-                    <motion.div
+                    {/* <motion.div
                         whileHover={{ rotate: 10, scale: 1.1 }}
                         transition={{ type: "spring", stiffness: 300 }}
                         className="mb-6"
@@ -107,7 +107,7 @@ export function BestSeller() {
                             fill
                             className="rounded-lg shadow-md"
                         />
-                    </motion.div>
+                    </motion.div> */}
 
                     <div className="flex items-center mb-4">
                         <Star className="text-amber-500 fill-amber-500 mr-2" size={24} />

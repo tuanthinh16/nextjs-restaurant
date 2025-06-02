@@ -70,8 +70,7 @@ export function AboutSection() {
                                 <Image
                                     src={business_logo}
                                     alt="Logo"
-                                    width={80}
-                                    height={80}
+                                    fill
                                     className="rounded-lg shadow-md"
                                 />
                             </motion.div>

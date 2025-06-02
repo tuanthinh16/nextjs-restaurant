@@ -131,6 +131,7 @@ const CartPage = () => {
                                                 <Image
                                                     src={item.image_url || '/images/default-food.jpg'}
                                                     alt={item.name}
+                                                    fill
                                                     className="w-24 h-24 object-cover rounded-lg"
                                                     loading="lazy"
                                                 />
@@ -315,6 +316,7 @@ const CartPage = () => {
                                     <label htmlFor="momo" className="flex items-center gap-2">
                                         <Image
                                             src="/images/momo-logo.png"
+                                            fill
                                             alt="MoMo"
                                             className="h-4 w-auto"
                                         />
@@ -333,6 +335,7 @@ const CartPage = () => {
                                             </p>
                                             <Image
                                                 src={process.env.NEXT_PUBLIC_MOMO_QR_CODE || '/images/momo-qr-placeholder.png'}
+                                                fill
                                                 alt="MoMo QR Code"
                                                 className="w-40 h-40 mx-auto"
                                             />

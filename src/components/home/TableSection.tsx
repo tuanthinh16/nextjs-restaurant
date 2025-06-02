@@ -152,6 +152,7 @@ const TablePage = () => {
                         <Image
                             src="/restaurant-layout.jpg"
                             alt={t('mapTitle')}
+                            fill
                             className="w-full h-auto rounded-lg border border-gray-200"
                         // onError={(e) => {
                         //     (e.target as HTMLImageElement).src = '/restaurant-layout-placeholder.jpg'

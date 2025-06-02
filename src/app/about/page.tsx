@@ -182,6 +182,7 @@ const AboutSection = () => {
                                     <Image
                                         src={`https://images.pexels.com/photos/32325857/pexels-photo-32325857/free-photo-of-chan-dung-den-tr-ng-c-a-m-t-ng-i-dan-ong-ph-n-chi-u-trong-b-vest.jpeg?auto=compress&cs=tinysrgb&w=600`}
                                         alt={t('about.teamMemberAlt', { number: item })}
+                                        fill
                                         className="w-full h-full object-cover"
                                     />
                                 </div>

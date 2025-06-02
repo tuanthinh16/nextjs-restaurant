@@ -62,7 +62,7 @@ const MenuPage = () => {
         }
 
         fetchMenu()
-    }, [t, mockMenuItems])
+    }, [])
 
     const handleDownloadPDF = () => {
         const pdfUrl = process.env.NEXT_PUBLIC_MENU_PDF_URL || '/menu.pdf'
@@ -133,6 +133,8 @@ const MenuPage = () => {
                             <div className="relative aspect-square overflow-hidden">
                                 <Image
                                     src={item.image_url}
+                                    content='lazy'
+                                    fill
                                     alt={item.title || t('menu.menuItem')}
                                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                 />
@@ -181,6 +183,8 @@ const MenuPage = () => {
                                         <Image
                                             src={selectedImage.image_url}
                                             alt={selectedImage.title || t('menu.menuItem')}
+                                            fill
+
                                             className="w-full h-auto object-contain"
                                         />
                                     </div>
@@ -369,6 +373,7 @@ const MenuPageDetail = () => {
                             <Image
                                 src={item.image_url ?? ''}
                                 alt={item.name}
+                                fill
                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                 loading="lazy"
                             />
@@ -468,6 +473,7 @@ const MenuPageDetail = () => {
                                     <Image
                                         src={selectedImage.image_url ?? ''}
                                         alt={selectedImage.name}
+                                        fill
                                         className="w-full h-auto object-contain"
                                         loading="lazy"
                                     />

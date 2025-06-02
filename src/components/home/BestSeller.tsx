@@ -54,7 +54,7 @@ export function BestSeller() {
 
     const onSelect = (id: number) => {
         const selectedItem = data.find(item => item.id === id)
-        console.log("Selected item: ", selectedItem)
+        //console.log("Selected item: ", selectedItem)
         if (selectedItem) {
             // Dispatch action to add item to cart
             dispatch(addToCart({ dish: selectedItem, quantity: 1 }));
@@ -104,8 +104,7 @@ export function BestSeller() {
                         <Image
                             src={business_logo}
                             alt="Logo"
-                            width={80}
-                            height={80}
+                            fill
                             className="rounded-lg shadow-md"
                         />
                     </motion.div>
@@ -147,6 +146,7 @@ export function BestSeller() {
                                                     src={item.image_url || ''}
                                                     alt={item.name}
                                                     fill
+                                                    objectFit='cover'
                                                     className="object-cover transition-transform duration-500 hover:scale-110"
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 />

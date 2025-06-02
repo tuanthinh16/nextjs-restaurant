@@ -123,7 +123,7 @@ const AboutSection = () => {
                             className="md:w-1/2 rounded-xl overflow-hidden"
                         >
                             <div className="relative h-80 w-full">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/w0ItI8M6HFI?si=vc9IpM72tj7sXApU" title="YouTube video player"
+                                <iframe width="350" height="315" src="https://www.youtube.com/embed/w0ItI8M6HFI?si=vc9IpM72tj7sXApU" title="YouTube video player"
                                     frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                             </div>

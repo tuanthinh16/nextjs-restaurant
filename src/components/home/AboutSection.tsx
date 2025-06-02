@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { font_title } from '@/config/font';
-import { business_logo } from '@/config/config';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 

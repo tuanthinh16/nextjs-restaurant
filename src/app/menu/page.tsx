@@ -183,7 +183,8 @@ const MenuPage = () => {
                                         <Image
                                             src={selectedImage.image_url}
                                             alt={selectedImage.title || t('menu.menuItem')}
-                                            fill
+                                            width={350}
+                                            height={500}
 
                                             className="w-full h-auto object-contain"
                                         />
@@ -373,7 +374,8 @@ const MenuPageDetail = () => {
                             <Image
                                 src={item.image_url ?? ''}
                                 alt={item.name}
-                                fill
+                                width={350}
+                                height={500}
                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                 loading="lazy"
                             />
@@ -473,7 +475,8 @@ const MenuPageDetail = () => {
                                     <Image
                                         src={selectedImage.image_url ?? ''}
                                         alt={selectedImage.name}
-                                        fill
+                                        width={350}
+                                        height={500}
                                         className="w-full h-auto object-contain"
                                         loading="lazy"
                                     />
@@ -496,7 +499,7 @@ const MenuPageDetail = () => {
                                             className="flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                                         >
                                             <ShoppingCart size={18} />
-                                            {t('addToCart')}
+                                            {/* {t('addToCart')} */}
                                         </button>
                                     </div>
                                 </div>

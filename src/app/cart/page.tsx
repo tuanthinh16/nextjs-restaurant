@@ -118,7 +118,7 @@ const CartPage = () => {
                                 className="bg-white rounded-xl shadow-md overflow-hidden"
                             >
                                 <div className="divide-y divide-gray-200">
-                                    {cartItems.map((item) => (
+                                    {cartItems?.map((item) => (
                                         <motion.div
                                             key={item.id}
                                             layout
@@ -131,7 +131,8 @@ const CartPage = () => {
                                                 <Image
                                                     src={item.image_url || '/images/default-food.jpg'}
                                                     alt={item.name}
-                                                    fill
+                                                    width={96}
+                                                    height={96}
                                                     className="w-24 h-24 object-cover rounded-lg"
                                                     loading="lazy"
                                                 />
@@ -238,7 +239,7 @@ const CartPage = () => {
                                             onChange={(e) => setCustomerInfo({ ...customerInfo, people: parseInt(e.target.value) })}
                                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-rose-500 focus:border-rose-500"
                                         >
-                                            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                                            {[2, 4, 6, 8, 10, 15, 20, 25, 30].map((num) => (
                                                 <option key={num} value={num}>
                                                     {num} {num === 1 ? t('cart.person') : t('cart.people')}
                                                 </option>
@@ -316,7 +317,8 @@ const CartPage = () => {
                                     <label htmlFor="momo" className="flex items-center gap-2">
                                         <Image
                                             src="/images/momo-logo.png"
-                                            fill
+                                            width={16}
+                                            height={16}
                                             alt="MoMo"
                                             className="h-4 w-auto"
                                         />
@@ -335,7 +337,8 @@ const CartPage = () => {
                                             </p>
                                             <Image
                                                 src={process.env.NEXT_PUBLIC_MOMO_QR_CODE || '/images/momo-qr-placeholder.png'}
-                                                fill
+                                                width={160}
+                                                height={160}
                                                 alt="MoMo QR Code"
                                                 className="w-40 h-40 mx-auto"
                                             />

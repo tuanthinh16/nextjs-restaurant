@@ -6,17 +6,23 @@ import HeroSection from "@/components/home/HeroSection";
 import MenuSection from "@/components/home/MenuSection";
 import Header from "@/components/ui/Header";
 import { Footer } from "@/components/ui/Footer";
+import { PromotionSection } from "@/components/home/PromotionSection";
+import MapEmbed from "@/components/ui/MapComponent";
 
 export default function Home() {
     const [inView, setInView] = useState({
         about: false,
         bestSeller: false,
         menu: false,
+        promotion: false,
+        mapembed: false,
     });
 
     const aboutRef = useRef(null);
     const bestSellerRef = useRef(null);
     const menuRef = useRef(null);
+    const proRef = useRef(null);
+    const mapRef = useRef(null);
     useEffect(() => {
         window.scrollTo(0, 0); // Cuộn lên đầu trang khi trang được load lại
     }, []); // Chỉ gọi 1 lần khi component được mount
@@ -38,7 +44,8 @@ export default function Home() {
         if (aboutRef.current) observer.observe(aboutRef.current);
         if (bestSellerRef.current) observer.observe(bestSellerRef.current);
         if (menuRef.current) observer.observe(menuRef.current);
-
+        if (proRef.current) observer.observe(proRef.current);
+        if (mapRef.current) observer.observe(mapRef.current);
         return () => {
             observer.disconnect();
         };
@@ -71,6 +78,20 @@ export default function Home() {
                     } transition-all duration-1000`}
             >
                 <MenuSection />
+            </div>
+            <div id="promotion"
+                ref={proRef}
+                className={`${inView.promotion ? "animate-fadeInUp" : "opacity-0"
+                    } transition-all duration-1000`}
+            >
+                <PromotionSection />
+            </div>
+            <div id="mapembed"
+                ref={mapRef}
+                className={`${inView.mapembed ? "animate-fadeInDown" : "opacity-0"
+                    } transition-all duration-1000`}
+            >
+                <MapEmbed />
             </div>
             <Footer />
         </>

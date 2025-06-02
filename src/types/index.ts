@@ -12,6 +12,7 @@ export interface Dish {
     description: string;
     image_url?: string;
     menu_type_id: number;
+    quantity?: number; // Optional for cart items
 }
 export interface DishType {
     id: number;
@@ -40,11 +41,36 @@ export interface DashboardData {
     totalDishes?: number;
     totalUsers?: number;
     revenue?: string;
-    revenueChart?: any[];
-    popularDishes?: any[];
+    revenueChart?: unknown[];
+    popularDishes?: unknown[];
 }
 export type CloudinaryUploadResponse = {
     public_id: string;
     secure_url: string;
     // Add other fields you expect from Cloudinary
 };
+export interface MenuItemPDF {
+    id: string
+    image_url: string
+    title?: string
+    description?: string
+}
+export type MenuCategory = 'all' | 'food' | 'drink' | 'combo' | 'special'
+
+export interface MenuItem {
+    id: string
+    name: string
+    description: string
+    price: number
+    image_url: string
+    category: MenuCategory
+    spicy_level?: number
+    is_vegetarian?: boolean
+    is_best_seller?: boolean
+}
+export interface DishReport {
+    id: number
+    name: string
+    popularity: number
+    orders: number
+}

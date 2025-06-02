@@ -6,14 +6,21 @@ import { Button } from '@/components/ui/button';
 import { getSocket } from '@/utils/socket';
 import Waitting from '@/components/ui/Waitting';
 import CardMenu from '@/components/ui/CardMenu';
-import { DishType } from '@/types';
+import { Dish, DishType } from '@/types';
 import { get } from '@/utils/api';
 import { Plus, CheckCircle } from 'lucide-react';
+import { Socket } from 'socket.io-client';
+
+
+type MenuWithQuantityResponse = {
+    success: boolean;
+    data: Dish[];
+};
 
 const Page = () => {
     const { id } = useParams();
-    const [menuItems, setMenuItems] = useState<any[]>([]);
-    const [filteredItems, setFilteredItems] = useState<any[]>([]);
+    const [menuItems, setMenuItems] = useState<Dish[]>([]);
+    const [filteredItems, setFilteredItems] = useState<Dish[]>([]);
     const [order, setOrder] = useState<Record<string, number>>({});
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -23,14 +30,14 @@ const Page = () => {
 
     // Socket operations
     useEffect(() => {
-        let socket: any;
+        let socket: Socket;
 
         const initSocket = async () => {
             socket = await getSocket();
             socket.emit('join_table', id);
             socket.emit('get_menu_with_quantity');
 
-            socket.on('menu_with_quantity_response', (res: any) => {
+            socket.on('menu_with_quantity_response', (res: MenuWithQuantityResponse) => {
                 if (res.success) {
                     setMenuItems(res.data);
                     setFilteredItems(res.data);
@@ -40,11 +47,11 @@ const Page = () => {
                 }
             });
 
-            socket.on('order_update', (data: any) => {
+            socket.on('order_update', (data: { tableId: string, order: Record<string, number> }) => {
                 if (data.tableId === id) setOrder(data.order);
             });
 
-            socket.on('order_submission_result', (result: any) => {
+            socket.on('order_submission_result', (result: { success: boolean, error: string }) => {
                 setLoading(false);
                 if (result.success) {
                     setSuccess('Đơn hàng đã được xác nhận thành công!');
@@ -85,13 +92,13 @@ const Page = () => {
         fetchDataToDishType();
     }, []);
 
-    const addItem = useCallback(async (itemId: string) => {
+    const addItem = useCallback(async (itemId: number) => {
         const socket = await getSocket();
         const updated = { ...order, [itemId]: (order[itemId] || 0) + 1 };
         setOrder(updated);
         socket.emit('order_update', { tableId: id, order: updated });
     }, [order, id]);
-    const subItem = useCallback(async (itemId: string) => {
+    const subItem = useCallback(async (itemId: number) => {
         const socket = await getSocket();
         const updated = { ...order, [itemId]: (order[itemId] || 0) - 1 };
         setOrder(updated);

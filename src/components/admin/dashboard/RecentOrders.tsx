@@ -13,7 +13,7 @@ function isValidStatus(status: string): status is OrderStatus {
 }
 
 // Transform data nếu cần
-function transformOrder(order: any): Order {
+function transformOrder(order: Order): Order {
     return {
         ...order,
         status: isValidStatus(order.status) ? order.status : 'pending' // Mặc định là pending nếu không hợp lệ

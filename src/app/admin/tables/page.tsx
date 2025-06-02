@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { deleteAPI, get, post, put } from '@/utils/api'
-import Loading from '@/components/ui/Loadding'
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { Dialog } from '@/components/ui/Dialog';
@@ -20,7 +19,6 @@ export default function TablePage() {
     const [error, setError] = useState<string | null>(null)
     const [openDialog, setOpenDialog] = useState(false)
 
-    const [newTable, setNewTable] = useState({ table_number: '', capacity: 4 })
     useEffect(() => {
         fetchTables()
     }, [])
@@ -33,8 +31,11 @@ export default function TablePage() {
             if (res.success) {
                 setTables(res.data as Table[])
             }
-        } catch (err: any) {
-            setError(err.message || 'Không thể tải danh sách bàn.')
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message || 'Không thể tải danh sách bàn.')
+            }
+
         } finally {
             setLoading(false)
         }

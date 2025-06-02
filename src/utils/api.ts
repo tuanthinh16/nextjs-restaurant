@@ -1,8 +1,9 @@
 // utils/api.ts
 import axios from 'axios';
+import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const api = axios.create({
     baseURL: NEXT_PUBLIC_API_URL,
@@ -19,8 +20,8 @@ export const getAuthToken = async (): Promise<string | null> => {
 
         // Kiểm tra nhiều trường hợp token có thể được lưu
         const token =
-            session?.accessToken ||        // Trường hợp thông thường
-            session?.user?.accessToken  // Khi token được lưu trong user       
+            (session as Session & { accessToken?: string })?.accessToken ||
+            (session?.user && (session.user as typeof session.user & { accessToken?: string }).accessToken);
 
         if (!token) {
             console.warn('No token found in session:', session);
@@ -35,7 +36,7 @@ export const getAuthToken = async (): Promise<string | null> => {
 };
 
 // Hàm kiểm tra nếu data có chứa file
-const isFileData = (data: any): boolean => {
+const isFileData = (data: unknown): boolean => {
     if (data instanceof FormData) return true;
     if (data instanceof File) return true;
     if (data instanceof Blob) return true;
@@ -93,14 +94,14 @@ api.interceptors.response.use(
 );
 
 // Các hàm API với TypeScript generics
-type ApiResponse<T = any> = {
+type ApiResponse<T = unknown> = {
     success: boolean;
     data?: T;
     message?: string;
     total_rows?: number;
 };
 
-export const get = async <T>(url: string, params?: any): Promise<ApiResponse<T>> => {
+export const get = async <T>(url: string, params?: unknown): Promise<ApiResponse<T>> => {
     try {
         const response = await api.get<T>(url, { params });
         return {
@@ -108,16 +109,22 @@ export const get = async <T>(url: string, params?: any): Promise<ApiResponse<T>>
             data: response.data,
             ...response.data
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
         return {
             success: false,
-            message: error.response?.data?.message || error.message
+            message: 'An unknown error occurred'
         };
     }
 };
 
 // Cập nhật các hàm HTTP với hỗ trợ file
-export const post = async <T>(url: string, data: any): Promise<ApiResponse<T>> => {
+export const post = async <T>(url: string, data: unknown): Promise<ApiResponse<T>> => {
     try {
         const response = await api.post<T>(url, data);
         return {
@@ -125,15 +132,27 @@ export const post = async <T>(url: string, data: any): Promise<ApiResponse<T>> =
             data: response.data,
             ...response.data
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                message: error.response?.data?.message || error.message
+            };
+        }
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
         return {
             success: false,
-            message: error.response?.data?.message || error.message
+            message: 'An unknown error occurred'
         };
     }
 };
 
-export const put = async <T>(url: string, data: any): Promise<ApiResponse<T>> => {
+export const put = async <T>(url: string, data: unknown): Promise<ApiResponse<T>> => {
     try {
         const response = await api.put<T>(url, data);
         return {
@@ -141,15 +160,27 @@ export const put = async <T>(url: string, data: any): Promise<ApiResponse<T>> =>
             data: response.data,
             ...response.data
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                message: error.response?.data?.message || error.message
+            };
+        }
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
         return {
             success: false,
-            message: error.response?.data?.message || error.message
+            message: 'An unknown error occurred'
         };
     }
 };
 
-export const deleteAPI = async <T>(url: string, data?: any): Promise<ApiResponse<T>> => {
+export const deleteAPI = async <T>(url: string, data?: unknown): Promise<ApiResponse<T>> => {
     try {
         const response = await api.delete<T>(url, { data });
         return {
@@ -157,10 +188,22 @@ export const deleteAPI = async <T>(url: string, data?: any): Promise<ApiResponse
             data: response.data,
             ...response.data
         };
-    } catch (error: any) {
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            return {
+                success: false,
+                message: error.response?.data?.message || error.message
+            };
+        }
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
         return {
             success: false,
-            message: error.response?.data?.message || error.message
+            message: 'An unknown error occurred'
         };
     }
 };

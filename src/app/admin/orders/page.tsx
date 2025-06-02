@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { get } from '@/utils/api'
 import { Order, OrderItem } from '@/types'
 import { formatTime } from '@/lib/dateTimeConvert'

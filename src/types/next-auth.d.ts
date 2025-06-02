@@ -1,31 +1,32 @@
 // types/next-auth.d.ts
-import NextAuth from "next-auth";
+import "next-auth";
 
 declare module "next-auth" {
-    interface Session {
+    interface User {
+        id: string;
+        name?: string | null;
+        email?: string | null;
+        image?: string | null;
+        role?: string;
         accessToken?: string;
-        user: {
-            id?: string;
-            name?: string;
-            email?: string;
-            image?: string;
-            username?: string; // Thêm trường tùy chỉnh
-            role?: string;    // Thêm trường tùy chỉnh
-        } & DefaultSession["user"];
     }
 
-    interface User {
-        id?: string;
+    interface Session {
+        user: {
+            id: string;
+            name?: string | null;
+            email?: string | null;
+            image?: string | null;
+            role?: string;
+        };
         accessToken?: string;
-        role?: string;
-        username?: string;
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        accessToken?: string;
+        id: string;
         role?: string;
-        username?: string;
+        accessToken?: string;
     }
 }

@@ -3,10 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/app/languageContex";
 import { business_name } from "@/config/config";
-import { SessionProvider } from "next-auth/react";
 import { ProvidersSession } from "@/components/SessionProviderApp";
-import Header from "@/components/ui/Header";
-import { Footer } from "@/components/ui/Footer";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,15 +50,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `} suppressHydrationWarning
       >
         <ProvidersSession >
           <LanguageProvider>
 
-            <main className="min-h-screen w-10/12 md:w-full">
+            <main className="min-h-screen md:w-full">
               {children}
             </main>
-
+            <div className='absolute bottom-0 left-0 mt-2 mr-4 flex items-center gap-2'>
+              <ToastContainer />
+            </div>
           </LanguageProvider>
         </ProvidersSession>
       </body>

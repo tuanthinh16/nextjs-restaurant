@@ -31,7 +31,7 @@ import { Dish, DishType } from '@/types';
 import { get } from '@/utils/api';
 
 interface DialogFormProps {
-    onSubmit: (data: any) => void;
+    onSubmit: (data: unknown) => void;
     onClose: () => void;
     editDish: Partial<Dish> | null; // Receives the dish data to edit
 }
@@ -57,14 +57,13 @@ export const DialogForm: React.FC<DialogFormProps> = ({ onSubmit, onClose, editD
     }, [editDish]);
     useEffect(() => {
         fetchDataToDishType();
+
     }, []);
     const fetchDataToDishType = async () => {
         const rs = await get<DishType[]>('/api/menu-type');
         if (rs.success) {
             setMenuTypes(rs.data as DishType[]);
         }
-        console.log("res menu-type ", rs)
-        console.log("menu type", menuTypes)
     }
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;

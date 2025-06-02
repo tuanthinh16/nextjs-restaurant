@@ -8,10 +8,10 @@ const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;
 const apiSecret = process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET; // Note: This shouldn't be public!
 const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
-if (!cloudName || !apiKey || !apiSecret) {
-    console.log(cloudName, apiKey, apiSecret)
-    throw new Error('Missing Cloudinary configuration');
-}
+// if (!cloudName || !apiKey || !apiSecret) {
+//     console.log(cloudName, apiKey, apiSecret)
+//     throw new Error('Missing Cloudinary configuration');
+// }
 
 export async function POST(request: Request) {
     try {

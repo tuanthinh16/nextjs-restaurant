@@ -4,9 +4,9 @@ import { get, post, put, deleteAPI } from '@/utils/api';  // Thêm API upload �
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogForm } from '@/components/ui/Dialog';
 import { CloudinaryUploadResponse, Dish } from '@/types';
-import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import Pagination from '@/components/ui/Pagination';
 import Waitting from '@/components/ui/Waitting';
+import Image from 'next/image';
 
 export default function MenuManager() {
     const [dishes, setDishes] = useState<Dish[]>([]);
@@ -37,17 +37,26 @@ export default function MenuManager() {
         fetchDishes(start);
     }, [currentPage]);
 
-    const handleSubmit = async (formData: Partial<Dish>) => {
-        if (!formData.name || !formData.price) return;
-        if (editDish?.id) {
-            await put(`/api/menu/${editDish.id}`, formData);
-        } else {
-            await post('/api/menu', formData);
+    const handleSubmit = async (formData: unknown) => {
+        // Kiểm tra formData là object và có name, price
+        if (
+            typeof formData === "object" &&
+            formData !== null &&
+            "name" in formData &&
+            "price" in formData
+        ) {
+            const dishData = formData as Partial<Dish>;
+            if (!dishData.name || !dishData.price) return;
+            if (editDish?.id) {
+                await put(`/api/menu/${editDish.id}`, dishData);
+            } else {
+                await post('/api/menu', dishData);
+            }
+            setDialogOpen(false);
+            setEditDish(null);
+            const start = (currentPage - 1) * limit;
+            fetchDishes(start);
         }
-        setDialogOpen(false);
-        setEditDish(null);
-        const start = (currentPage - 1) * limit;
-        fetchDishes(start);
     };
 
     const handleDelete = async (id: number) => {
@@ -179,7 +188,7 @@ export default function MenuManager() {
                                 </div>
                             </div>
                             <div className="ml-4">
-                                <img
+                                <Image
                                     src={dish.image_url || '/default-image.jpg'}
                                     alt={dish.name}
                                     className="w-32 h-32 object-cover cursor-pointer"

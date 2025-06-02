@@ -2,15 +2,13 @@
 import { PopularDishes } from "@/components/admin/dashboard/PopularDishes";
 import { RevenueChart } from "@/components/admin/dashboard/RevenueChart";
 import { StatsGrid } from "@/components/admin/dashboard/StatsGrid";
-import { DashboardData } from "@/types";
+import { DashboardData, DishReport } from "@/types";
 import { get } from "@/utils/api";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Waitting from "../ui/Waitting";
 
 export default function DashboardPage() {
-    const { data: session } = useSession();
-    const [data, setDashboardData] = useState<DashboardData>({});
+    const [data, setDashboardData] = useState<DashboardData | null>({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -47,11 +45,11 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow">
-                    <RevenueChart data={data?.revenueChart || []} />
+                    <RevenueChart data={(data?.revenueChart as { day: string; revenue: number }[]) || []} />
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow">
-                    <PopularDishes dishes={data?.popularDishes || []} />
+                    <PopularDishes dishes={(data?.popularDishes as DishReport[]) || []} />
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 'use client';
 import { createContext, useContext, useState, ReactNode } from 'react';
 import i18n from '@/i18n'; // Import the i18n instance
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
 
 type LanguageContextType = {
     locale: string;
@@ -19,8 +21,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     return (
         <LanguageContext.Provider value={{ locale, setLocale: changeLanguage }}>
-            {children}
+            <Provider store={store}>
+                {children}
+            </Provider>
         </LanguageContext.Provider>
+
     );
 }
 

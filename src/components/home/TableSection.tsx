@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Lock, Unlock, MapPin, Users, ChevronRight, X } from 'lucide-react'
 import Header from '../ui/Header'
 import { useTranslation } from 'react-i18next'
+import Image from 'next/image'
+import { Socket } from 'socket.io-client'
 
 type Table = {
     id: number
@@ -22,7 +24,7 @@ const TablePage = () => {
     const router = useRouter()
 
     useEffect(() => {
-        let socket: any
+        let socket: Socket
 
         const initSocket = async () => {
             try {
@@ -147,7 +149,7 @@ const TablePage = () => {
                         <h2 className="text-xl font-semibold text-gray-800">{t('mapTitle')}</h2>
                     </div>
                     <div className="p-4">
-                        <img
+                        <Image
                             src="/restaurant-layout.jpg"
                             alt={t('mapTitle')}
                             className="w-full h-auto rounded-lg border border-gray-200"

@@ -1,20 +1,14 @@
 import { Button } from '@/components/ui/button';
+import { Dish } from '@/types';
 import { Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { FiPlus } from "react-icons/fi";
 import { RiSubtractFill } from "react-icons/ri";
-import Input from './Input';
 interface CardMenuProps {
-    item: {
-        id: string;
-        name: string;
-        description: string;
-        price: number;
-        image: string; // Added image prop
-    };
+    item: Dish;
     order: Record<string, number>;
-    addItem: (itemId: string) => void;
-    subItem: (itemId: string) => void;
+    addItem: (itemId: number) => void;
+    subItem: (itemId: number) => void;
 }
 
 const CardMenu = ({ item, order, addItem, subItem }: CardMenuProps) => {
@@ -32,7 +26,7 @@ const CardMenu = ({ item, order, addItem, subItem }: CardMenuProps) => {
         <div
             className="relative h-64 rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]"
             style={{
-                backgroundImage: `url(${item.image})`,
+                backgroundImage: `url(${item.image_url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}

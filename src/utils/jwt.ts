@@ -6,7 +6,7 @@ interface JwtPayload {
     username?: string;
     role?: string;
     exp?: number;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export const decodeJwt = (token: string): JwtPayload | null => {

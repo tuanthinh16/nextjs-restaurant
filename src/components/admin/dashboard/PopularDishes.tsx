@@ -1,11 +1,7 @@
-interface Dish {
-    id: number
-    name: string
-    popularity: number
-    orders: number
-}
+import { DishReport } from "@/types";
 
-export function PopularDishes({ dishes }: { dishes: Dish[] }) {
+
+export function PopularDishes({ dishes }: { dishes: DishReport[] }) {
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Món ăn phổ biến</h2>

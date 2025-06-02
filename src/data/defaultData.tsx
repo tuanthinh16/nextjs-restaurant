@@ -1,0 +1,7 @@
+export const defaultDataMenu = [
+    { id: 1, name: 'Phở Bò', price: 45000, description: 'Phở bò truyền thống Hà Nội', image_url: 'https://images.pexels.com/photos/6646024/pexels-photo-6646024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', menu_type_id: 1 },
+    { id: 2, name: 'Bún Chả', price: 40000, description: 'Bún chả Hà Nội', image_url: 'https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/08/cach-lam-nuoc-mam-bun-cha-02.jpg', menu_type_id: 1 },
+    { id: 3, name: 'Cà Phê Sữa Đá', price: 25000, description: 'Cà phê sữa đá truyền thống', image_url: 'https://lh6.googleusercontent.com/proxy/LcrQvf5VlPKjyIVgH6UUURhh9HPOorCMbr091cGQwkF78pqw6TtPnLT1zlsPJA87rvAxSrntSrJhT6F2u_O6N3i2pK4y32kEZ7cvDpHA9DwHhvnLNozl_5EPfQzpwpgVHbaMky5_rdUqjAzGmGNY6VYeZDhmFDfDpk8d20z8Q9bX-OYGaTeiXuiaA4M', menu_type_id: 2 },
+    { id: 4, name: 'Bánh Mì', price: 20000, description: 'Bánh mì thịt đặc biệt', image_url: 'https://images.pexels.com/photos/14226649/pexels-photo-14226649.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', menu_type_id: 1 },
+    { id: 5, name: 'Trà Đá', price: 5000, description: 'Trà đá mát lạnh', image_url: 'https://images.pexels.com/photos/24304858/pexels-photo-24304858/free-photo-of-l-nh-u-ng-n-c-da-bang.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', menu_type_id: 2 }
+]

@@ -51,16 +51,13 @@ export function Sidebar() {
                     ))}
                     <button
                         onClick={async () => {
-                            try {
-                                const res = await post('/api/admin/reset-cache', null)
-                                if (res.success)
-                                    alert(res.message || 'Successfully')
-                                else
-                                    console.log("Error when reset cache: ", res.data)
-                            } catch (err) {
 
-                                alert('Fail')
-                            }
+                            const res = await post('/api/admin/reset-cache', null)
+                            if (res.success)
+                                alert(res.message || 'Successfully')
+                            else
+                                console.log("Error when reset cache: ", res.data)
+
                         }}
                         className="w-full mt-6 text-left flex items-center p-3 rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
                     >

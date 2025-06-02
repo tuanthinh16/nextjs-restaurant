@@ -6,7 +6,7 @@ const CardLoading = () => {
             {[...Array(3)].map((_, index) => (
                 <div
                     key={index}
-                    className="animate-pulse bg-white rounded-lg shadow p-4 space-y-4 w-full max-w-sm w-[350px]"
+                    className="animate-pulse bg-white rounded-lg shadow p-4 space-y-4 md:w-full max-w-sm w-[350px]"
                 >
                     <div className="h-40 bg-gray-300 rounded"></div>
                     <div className="h-6 bg-gray-300 rounded w-3/4"></div>
